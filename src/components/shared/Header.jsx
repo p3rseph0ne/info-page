@@ -6,11 +6,11 @@ import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../assets/logo.webp";
 import MenuBullet from "../../assets/menu-bullet.svg";
-import { HashLink as Link } from "react-router-hash-link";
+import { HashLink } from "react-router-hash-link";
 
 const pages = [
   {
@@ -61,7 +61,9 @@ function Header() {
     <StyledAppBar position="sticky">
       <StyledContainer maxWidth="xl">
         <Toolbar disableGutters>
-          <StyledLogo src={Logo} alt="Baldurs Gate 3" />
+          <Link to="/">
+            <StyledLogo src={Logo} alt="Baldurs Gate 3" />
+          </Link>
           <NavigationContainer>
             {pages.map((page) => (
               <Box key={page.label}>
@@ -95,9 +97,9 @@ function Header() {
                   >
                     {page.children.map((child) => (
                       <StyledMenuItem key={child.label}>
-                        <StyledLink onClick={handleClose} to={child.path}>
+                        <StyledHashLink onClick={handleClose} to={child.path}>
                           {child.label}
-                        </StyledLink>
+                        </StyledHashLink>
                       </StyledMenuItem>
                     ))}
                   </StyledMenu>
@@ -171,6 +173,6 @@ const MenuButton = styled(Button)`
   }
 `;
 
-const StyledLink = styled(Link)`
+const StyledHashLink = styled(HashLink)`
   text-decoration: none;
 `;
