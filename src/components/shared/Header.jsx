@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../assets/logo.webp";
 import MenuBullet from "../../assets/menu-bullet.svg";
+import { HashLink as Link } from "react-router-hash-link";
 
 const pages = [
   {
@@ -17,19 +18,19 @@ const pages = [
     children: [
       {
         label: "Intro",
-        path: "/party",
+        path: "/#intro",
       },
       {
         label: "Companions",
-        path: "/quiz",
+        path: "/#origin",
       },
       {
-        label: "Dictionary",
-        path: "/quiz",
+        label: "FAQ",
+        path: "/#faq",
       },
       {
         label: "Noteworthy NPCs",
-        path: "/quiz",
+        path: "/#npcs",
       },
     ],
   },
@@ -54,11 +55,6 @@ function Header() {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const navigateTo = (path) => {
-    navigate(path);
-    handleClose();
   };
 
   return (
@@ -98,11 +94,10 @@ function Header() {
                     }}
                   >
                     {page.children.map((child) => (
-                      <StyledMenuItem
-                        key={child.label}
-                        onClick={() => navigateTo(child.path)}
-                      >
-                        {child.label}
+                      <StyledMenuItem key={child.label}>
+                        <StyledLink onClick={handleClose} to={child.path}>
+                          {child.label}
+                        </StyledLink>
                       </StyledMenuItem>
                     ))}
                   </StyledMenu>
@@ -174,4 +169,8 @@ const MenuButton = styled(Button)`
   &:hover {
     color: white !important;
   }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;

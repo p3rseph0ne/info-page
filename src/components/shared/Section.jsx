@@ -2,9 +2,9 @@ import { Box } from "@mui/material";
 import styled from "styled-components";
 import Divider from "./Divider";
 
-function Section({ children, background, height, divider = true }) {
+function Section({ id, children, background, height, divider = true }) {
   return (
-    <Container $height={height} $background={background}>
+    <Container id={id} $height={height} $background={background}>
       {children}
       {divider && <Divider />}
     </Container>

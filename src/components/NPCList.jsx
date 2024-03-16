@@ -140,25 +140,32 @@ const NPCs = [
 
 function NPCList() {
   return (
-    <Box>
-      <Headline>Notable NPCs</Headline>
-      <StyledBox>
+    <StyledBox>
+      <Headline>Noteworthy NPCs</Headline>
+      <StyledUL>
         {NPCs.map((npc) => {
           return (
-            <CharacterDescription key={npc.name}>
-              {npc.name}: {npc.description}
-            </CharacterDescription>
+            <li key={npc.name}>
+              <CharacterDescription>
+                <strong>{npc.name}:</strong> {npc.description}
+              </CharacterDescription>
+            </li>
           );
         })}
-      </StyledBox>
-    </Box>
+      </StyledUL>
+    </StyledBox>
   );
 }
 export default NPCList;
 
 const StyledBox = styled(Box)`
+  margin: 2rem 0;
+`;
+
+const StyledUL = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 50px;
 `;
 
 const CharacterDescription = styled(Typography)`
