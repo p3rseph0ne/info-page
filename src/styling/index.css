@@ -11,3 +11,13 @@
   font-family: "Abhaya Libre" !important;
   color: #fbcea0 !important;
 }
+
+#root {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+}

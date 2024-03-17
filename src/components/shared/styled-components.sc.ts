@@ -6,3 +6,7 @@ export const Headline = styled(Typography)`
   margin-bottom: 1rem !important;
   text-transform: uppercase;
 `;
+
+export const CharacterImage = styled.img`
+  width: 150px;
+`;

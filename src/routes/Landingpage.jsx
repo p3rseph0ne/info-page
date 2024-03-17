@@ -1,5 +1,4 @@
 import React from "react";
-import "../styling/Landingpage.css";
 import OriginCharacters from "../components/landingPage/originCharacters/OriginCharacters";
 import FAQAccordion from "../components/landingPage/FAQAccordion";
 import DeadThree from "../components/landingPage/deadThree/DeadThree";
@@ -7,8 +6,7 @@ import Characters from "../assets/characters.png";
 import styled from "styled-components";
 import { Typography } from "@mui/material";
 import Section from "../components/shared/Section";
-import { Headline } from "../components/shared/styled-components.sc";
-import FAQ from "../assets/faq.png";
+import Hell from "../assets/hell.png";
 import Grove from "../assets/grove.png";
 import Stage from "../components/shared/Stage";
 
@@ -29,7 +27,7 @@ function Landingpage() {
       <Section id="faq" background={Grove} height="50vh">
         <FAQAccordion />
       </Section>
-      <Section id="npcs" background={FAQ} divider={false}>
+      <Section id="npcs" background={Hell} divider={false}>
         <DeadThree />
       </Section>
     </div>
