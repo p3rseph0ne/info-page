@@ -1,16 +1,16 @@
 import React from "react";
 import "../styling/Landingpage.css";
-import OriginCharacters from "../components/originCharacters/OriginCharacters";
-import FAQAccordion from "../components/FAQAccordion";
-import NPCList from "../components/NPCList";
-import Stage from "../assets/stage.png";
+import OriginCharacters from "../components/landingPage/originCharacters/OriginCharacters";
+import FAQAccordion from "../components/landingPage/FAQAccordion";
+import DeadThree from "../components/landingPage/deadThree/DeadThree";
 import Characters from "../assets/characters.png";
 import styled from "styled-components";
 import { Typography } from "@mui/material";
 import Section from "../components/shared/Section";
-import { Headline } from "../components/styled-components.sc";
+import { Headline } from "../components/shared/styled-components.sc";
 import FAQ from "../assets/faq.png";
 import Grove from "../assets/grove.png";
+import Stage from "../components/shared/Stage";
 
 const text = `
 As you step through the gates of our digital realm, you find yourself at the threshold of a world brimming with enchantment, peril, and the promise of untold stories. This is where heroes are forged in the crucible of conflict, where alliances are formed in the shadows of ancient ruins, and where every choice can tip the scales of fate.
@@ -22,18 +22,15 @@ Whether you're a seasoned explorer of the Forgotten Realms or setting foot in th
 function Landingpage() {
   return (
     <div>
-      <Section id="intro" background={Stage}>
-        <Headline>WELCOME TO FAERUN AND ALL ITS MAGIC</Headline>
-        <Paragraph>{text}</Paragraph>
-      </Section>
+      <Stage headline={"Welcome to Faerun and all its magic"} text={text} />
       <Section id="origin" background={Characters}>
         <OriginCharacters />
       </Section>
-      <Section id="faq" background={FAQ} height="50vh">
+      <Section id="faq" background={Grove} height="50vh">
         <FAQAccordion />
       </Section>
-      <Section id="npcs" background={Grove} divider={false}>
-        <NPCList />
+      <Section id="npcs" background={FAQ} divider={false}>
+        <DeadThree />
       </Section>
     </div>
   );
