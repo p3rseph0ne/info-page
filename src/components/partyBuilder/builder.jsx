@@ -1,7 +1,7 @@
 import { Box, Button, Tooltip, Typography } from "@mui/material";
 import { Headline } from "../shared/styled-components.sc";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Karlach from "../../assets/characters/karlach.png";
 import Shadowheart from "../../assets/characters/shadowheart.png";
 import Astarion from "../../assets/characters/astarion.png";
@@ -145,14 +145,259 @@ const originCharacterParties = [
   },
 ];
 
+const tavParties = [
+  {
+    class: "Barbarian",
+    party: [
+      {
+        name: "Astarion",
+        description:
+          "Provides critical stealth capabilities and high single-target damage.",
+      },
+      {
+        name: "Shadowheart",
+        description:
+          "Her divine magic offers healing and support, vital for sustained engagements.",
+      },
+      {
+        name: "Gale",
+        description:
+          "His arcane prowess delivers powerful area-of-effect and control spells.",
+      },
+    ],
+  },
+  {
+    class: "Bard",
+    party: [
+      {
+        name: "Lae'zel",
+        description:
+          "Offers a robust front-line defense and strong melee combat presence.",
+      },
+      {
+        name: "Wyll",
+        description:
+          "Brings versatile magical attacks and crowd control options.",
+      },
+      {
+        name: "Shadowheart",
+        description:
+          "Provides essential healing and buffing, bolstering party resilience.",
+      },
+    ],
+  },
+  {
+    class: "Cleric",
+    party: [
+      {
+        name: "Astarion",
+        description:
+          "Adds agility and precision strikes, complementing the Cleric's magic.",
+      },
+      {
+        name: "Gale",
+        description:
+          "Delivers a wide range of magical attacks and strategic versatility.",
+      },
+      {
+        name: "Lae'zel",
+        description:
+          "Serves as a dependable tank, absorbing and deflecting enemy attacks.",
+      },
+    ],
+  },
+  {
+    class: "Druid",
+    party: [
+      {
+        name: "Wyll",
+        description:
+          "His eldritch magic enhances the party's offensive magic capabilities.",
+      },
+      {
+        name: "Astarion",
+        description:
+          "Provides indispensable stealth and backstabbing abilities.",
+      },
+      {
+        name: "Shadowheart",
+        description:
+          "Augments the party's durability with healing and protective spells.",
+      },
+    ],
+  },
+  {
+    class: "Fighter",
+    party: [
+      {
+        name: "Gale",
+        description:
+          "Brings powerful spellcasting to support the Fighter's physical prowess.",
+      },
+      {
+        name: "Shadowheart",
+        description:
+          "Ensures the party's longevity with healing and divine spells.",
+      },
+      {
+        name: "Astarion",
+        description:
+          "Offers versatile support through stealth and quick strikes.",
+      },
+    ],
+  },
+  {
+    class: "Monk",
+    party: [
+      {
+        name: "Lae'zel",
+        description: "Her martial prowess complements the Monk's combat style.",
+      },
+      {
+        name: "Gale",
+        description: "Provides essential magical support and area control.",
+      },
+      {
+        name: "Shadowheart",
+        description: "Her cleric abilities offer crucial healing and buffs.",
+      },
+    ],
+  },
+  {
+    class: "Paladin",
+    party: [
+      {
+        name: "Astarion",
+        description:
+          "His rogue skills add a necessary element of subtlety and finesse.",
+      },
+      {
+        name: "Gale",
+        description:
+          "Augments the party's magical offense and strategic depth.",
+      },
+      {
+        name: "Wyll",
+        description:
+          "Introduces additional magical firepower and crowd control.",
+      },
+    ],
+  },
+  {
+    class: "Ranger",
+    party: [
+      {
+        name: "Lae'zel",
+        description: "Provides frontline engagement and physical resilience.",
+      },
+      {
+        name: "Shadowheart",
+        description: "Brings valuable healing and utility magic to the group.",
+      },
+      {
+        name: "Gale",
+        description:
+          "His spellcasting diversifies the party's tactical options.",
+      },
+    ],
+  },
+  {
+    class: "Rogue",
+    party: [
+      {
+        name: "Lae'zel",
+        description:
+          "Her combat skills secure the frontline, allowing the Rogue to maneuver.",
+      },
+      {
+        name: "Wyll",
+        description: "Offers powerful spells to control and damage enemies.",
+      },
+      {
+        name: "Shadowheart",
+        description:
+          "Provides essential support with healing and protection spells.",
+      },
+    ],
+  },
+  {
+    class: "Sorcerer",
+    party: [
+      {
+        name: "Lae'zel",
+        description:
+          "Ensures the Sorcerer can cast spells without interruption.",
+      },
+      {
+        name: "Astarion",
+        description: "Adds versatility with his sneaking and lockpicking.",
+      },
+      {
+        name: "Shadowheart",
+        description:
+          "Augments the party's magical capabilities with divine support.",
+      },
+    ],
+  },
+  {
+    class: "Warlock",
+    party: [
+      {
+        name: "Gale",
+        description:
+          "Creates a formidable pair of casters with complementary magic.",
+      },
+      {
+        name: "Lae'zel",
+        description:
+          "Her warrior skills protect the Warlock during spellcasting.",
+      },
+      {
+        name: "Shadowheart",
+        description:
+          "Provides healing and buffs, ensuring the party remains at full strength.",
+      },
+    ],
+  },
+  {
+    class: "Wizard",
+    party: [
+      {
+        name: "Lae'zel",
+        description:
+          "Acts as a guardian, keeping enemies at bay with her martial skills.",
+      },
+      {
+        name: "Astarion",
+        description:
+          "Brings critical support through stealth and tactical attacks.",
+      },
+      {
+        name: "Shadowheart",
+        description:
+          "Her healing and protective magic are indispensable for party survival.",
+      },
+    ],
+  },
+];
+
 function Builder() {
-  const [currentPicks, setCurrentPicks] = useState([]);
+  const [currentPicksOrigin, setCurrentPicksOrigin] = useState([]);
+  const [currentPicksTav, setCurrentPicksTav] = useState([]);
   const [currentParty, setCurrentParty] = useState([]);
   const [currentSelected, setCurrentSelected] = useState();
   const [activeButton, setActiveButton] = useState();
+  const [activeClassButton, setActiveClassButton] = useState();
+
+  useEffect(() => {
+    setCurrentParty([]);
+    setCurrentSelected(undefined);
+    setActiveClassButton(undefined);
+  }, [activeButton]);
 
   const onOriginButtonClick = () => {
     setActiveButton("origin");
+    setCurrentPicksTav([]);
     const characterList = originCharacterParties.map((character) => {
       return {
         name: character.name,
@@ -161,7 +406,18 @@ function Builder() {
       };
     });
 
-    setCurrentPicks(characterList);
+    setCurrentPicksOrigin(characterList);
+  };
+
+  const onTavButtonClick = () => {
+    setActiveButton("tav");
+    setCurrentPicksOrigin([]);
+    const characterList = tavParties.map((character) => {
+      return {
+        class: character.class,
+      };
+    });
+    setCurrentPicksTav(characterList);
   };
 
   const onCharacterButtonClick = (name, index) => {
@@ -172,13 +428,26 @@ function Builder() {
     setCurrentParty(party[0]);
   };
 
+  const onClassButtonClick = (classname, index) => {
+    setActiveClassButton(classname);
+    setCurrentSelected(index);
+    const party = tavParties
+      .filter((character) => character.class == classname)
+      .map((character) => character.party);
+    setCurrentParty(party[0]);
+  };
+
   return (
     <Box>
       <Headline>Build your party</Headline>
       <Container>
         <BuildArea>
           <ButtonContainer>
-            <BuilderButton $active={activeButton == "tav"} variant="outlined">
+            <BuilderButton
+              $active={activeButton == "tav"}
+              variant="outlined"
+              onClick={onTavButtonClick}
+            >
               Tav
             </BuilderButton>
             <BuilderButton
@@ -190,7 +459,7 @@ function Builder() {
             </BuilderButton>
           </ButtonContainer>
           <PickContainer>
-            {currentPicks.map((pick, index) => (
+            {currentPicksOrigin.map((pick, index) => (
               <Tooltip key={pick.name} title={`${pick.name} (${pick.class})`}>
                 <CharacterButton
                   $fullOpacity={index == currentSelected}
@@ -199,6 +468,19 @@ function Builder() {
                   <CharacterImage src={pick.image} alt={pick.name} />
                 </CharacterButton>
               </Tooltip>
+            ))}
+          </PickContainer>
+
+          <PickContainer>
+            {currentPicksTav.map((pick, index) => (
+              <BuilderButton
+                key={pick.class}
+                $active={activeClassButton == pick.class}
+                variant="outlined"
+                onClick={() => onClassButtonClick(pick.class, index)}
+              >
+                {pick.class}
+              </BuilderButton>
             ))}
           </PickContainer>
         </BuildArea>
@@ -249,6 +531,7 @@ const BuilderButton = styled(Button)`
   width: 150px;
   margin-right: 1rem !important;
   margin-left: 1rem !important;
+  margin-bottom: 2rem !important;
   border-color: #fbcea0 !important;
   background-color: ${({ $active }) =>
     $active ? "#fbcea0 !important" : "transparent"};

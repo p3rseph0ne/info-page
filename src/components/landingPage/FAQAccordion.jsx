@@ -12,7 +12,7 @@ const FAQ = [
   {
     question: "What is the Dungeons & Dragons rule set?",
     answer:
-      "Dungeons & Dragons (D&D) is a well-known pen-and-paper role-playing game that has been around since the 1970s. It establishes the rules and mechanics that are also used in Baldur's Gate 3. D&D offers a variety of character classes, races, abilities, and more, all integrated into the game.",
+      "Dungeons & Dragons (D&D) is a well-known pen-and-paper role-playing game that has been around since the 1970s. It establishes the rules and mechanics that are also used in Baldur's Gate 3. D&D offers a variety of character classes, races, abilities, and more, all integrated into the game. BG3 uses the Fifth Edition of DnD Rules.",
   },
   {
     question: "What are character classes?",

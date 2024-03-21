@@ -29,7 +29,7 @@ const pages = [
         path: "/#faq",
       },
       {
-        label: "Noteworthy NPCs",
+        label: "The Dead Three",
         path: "/#npcs",
       },
     ],
