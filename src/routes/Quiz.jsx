@@ -114,6 +114,12 @@ function Quiz() {
     setActiveChoices(nextChoices);
     setActiveCorrectAnswer(nextCorrectAnswer);
   };
+
+  const onResults = () => {
+    setActiveQuestion();
+    setActiveChoices();
+  };
+
   const onNextQuestion = () => {
     console.log("score nach vorheriger frage:" + result.score);
     if (selectedAnswer === activeCorrectAnswer) {
@@ -137,16 +143,14 @@ function Quiz() {
     const nextChoices = Quizquestions[nextIndex].choices;
     const nextCorrectAnswer = Quizquestions[nextIndex].correctAnswer;
 
-    console.log(nextQuestion);
-    console.log(nextChoices);
-    console.log(nextCorrectAnswer);
-
-    if (nextIndex <= 9) {
+    if (nextIndex < Quizquestions.length - 1) {
+      console.log("next index: " + nextIndex);
       setActiveQuestion(nextQuestion);
       setActiveChoices(nextChoices);
       setActiveCorrectAnswer(nextCorrectAnswer);
     } else {
-      setQuizCompleted = true;
+      console.log("else next index: " + nextIndex);
+      setQuizCompleted(true);
     }
     setSelectedAnswer("");
   };
@@ -167,7 +171,7 @@ function Quiz() {
             </QuizButton>
           )}
 
-          {activeQuestion && <Box> {activeQuestion} </Box>}
+          {activeChoices && <Box> {activeQuestion} </Box>}
           <AnswerContainer>
             {activeChoices &&
               activeChoices.map((choice, index) => (
@@ -188,6 +192,11 @@ function Quiz() {
               onClick={() => onNextQuestion()}
             >
               NEXT
+            </QuizButton>
+          )}
+          {quizCompleted && (
+            <QuizButton variant="outlined" onClick={() => onResults()}>
+              RESULTS
             </QuizButton>
           )}
         </StyledBox>
