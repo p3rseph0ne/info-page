@@ -126,6 +126,7 @@ const StyledAccordion = styled(Accordion)`
 
 const StyledAccordionSummary = styled(AccordionSummary)`
   background-color: rgba(0, 0, 0, 0.4) !important;
+  text-transform: uppercase !important;
 `;
 
 const StyledAccordionDetails = styled(AccordionDetails)`

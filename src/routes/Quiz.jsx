@@ -4,10 +4,14 @@ import Section from "../components/shared/Section";
 import { Headline } from "../components/shared/styled-components.sc";
 import styled from "styled-components";
 import { Box, Button } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function Quiz() {
-  const [count, setCount] = useState(0);
-
   const Quizquestions = [
     {
       question: "What city does the game prominently feature?",
@@ -90,14 +94,13 @@ function Quiz() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [result, setResult] = useState({
     score: 0,
-    correctAnswers: 0,
-    wrongAnswers: 0,
+    givenAnswers: [],
   });
+  const [showResultButton, setShowResultButton] = useState(false);
 
   const onStart = () => {
     /* check ob -1 ist */
     /* check ob nächste Frage existiert*/
-
     const nextIndex =
       Quizquestions.findIndex(
         (question) => question.question === activeQuestion
@@ -107,29 +110,48 @@ function Quiz() {
     const nextChoices = Quizquestions[nextIndex].choices;
     const nextCorrectAnswer = Quizquestions[nextIndex].correctAnswer;
 
-    console.log(nextQuestion);
-    console.log(nextChoices);
-    console.log(nextCorrectAnswer);
     setActiveQuestion(nextQuestion);
     setActiveChoices(nextChoices);
     setActiveCorrectAnswer(nextCorrectAnswer);
   };
 
   const onResults = () => {
-    setActiveQuestion();
-    setActiveChoices();
-  };
-
-  const onNextQuestion = () => {
-    console.log("score nach vorheriger frage:" + result.score);
     if (selectedAnswer === activeCorrectAnswer) {
       setResult({
         ...result,
         score: result.score + 1,
+        givenAnswers: result.givenAnswers.concat([selectedAnswer]),
       });
       console.log("richtig");
       console.log("score: " + result.score);
     } else {
+      setResult({
+        ...result,
+        givenAnswers: result.givenAnswers.concat([selectedAnswer]),
+      });
+      console.log("falsch");
+      console.log("score: " + result.score);
+    }
+    setActiveQuestion();
+    setActiveChoices();
+    setSelectedAnswer();
+    setShowResultButton(false);
+  };
+
+  const onNextQuestion = () => {
+    if (selectedAnswer === activeCorrectAnswer) {
+      setResult({
+        ...result,
+        score: result.score + 1,
+        givenAnswers: result.givenAnswers.concat([selectedAnswer]),
+      });
+      console.log("richtig");
+      console.log("score: " + result.score);
+    } else {
+      setResult({
+        ...result,
+        givenAnswers: result.givenAnswers.concat([selectedAnswer]),
+      });
       console.log("falsch");
       console.log("score: " + result.score);
     }
@@ -138,19 +160,21 @@ function Quiz() {
       Quizquestions.findIndex(
         (question) => question.question === activeQuestion
       ) + 1;
+    console.log("next index " + nextIndex);
 
     const nextQuestion = Quizquestions[nextIndex].question;
     const nextChoices = Quizquestions[nextIndex].choices;
     const nextCorrectAnswer = Quizquestions[nextIndex].correctAnswer;
 
-    if (nextIndex < Quizquestions.length - 1) {
-      console.log("next index: " + nextIndex);
+    if (nextIndex == Quizquestions.length - 1) {
+      setQuizCompleted(true);
+      setShowResultButton(true);
+    }
+    if (nextIndex < Quizquestions.length) {
+      console.log("next index < quizquestions.length" + nextIndex);
       setActiveQuestion(nextQuestion);
       setActiveChoices(nextChoices);
       setActiveCorrectAnswer(nextCorrectAnswer);
-    } else {
-      console.log("else next index: " + nextIndex);
-      setQuizCompleted(true);
     }
     setSelectedAnswer("");
   };
@@ -165,12 +189,11 @@ function Quiz() {
       <Section background={Grove}>
         <Headline>Are you ready for Faerun?</Headline>
         <StyledBox>
-          {!activeQuestion && (
+          {!activeQuestion && !quizCompleted && (
             <QuizButton variant="outlined" onClick={() => onStart()}>
               START
             </QuizButton>
           )}
-
           {activeChoices && <Box> {activeQuestion} </Box>}
           <AnswerContainer>
             {activeChoices &&
@@ -194,10 +217,37 @@ function Quiz() {
               NEXT
             </QuizButton>
           )}
-          {quizCompleted && (
+          {showResultButton && (
             <QuizButton variant="outlined" onClick={() => onResults()}>
               RESULTS
             </QuizButton>
+          )}
+          {quizCompleted && !activeQuestion && (
+            <ResultContainer>
+              <Stack spacing={2} direction="row">
+                <CircularProgress
+                  variant="determinate"
+                  value={result.score * 10}
+                />
+                <Headline>
+                  You got {result.score} out of {Quizquestions.length} correct.
+                </Headline>
+              </Stack>
+
+              {Quizquestions.map((question, index) => (
+                <StyledAccordion>
+                  <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    {question.question}
+                  </StyledAccordionSummary>
+                  <StyledAccordionDetails>
+                    Correct Answer: {question.correctAnswer}
+                    <br />
+                    Your Answer:{" "}
+                    {result.givenAnswers[Quizquestions.indexOf(question)]}
+                  </StyledAccordionDetails>
+                </StyledAccordion>
+              ))}
+            </ResultContainer>
           )}
         </StyledBox>
       </Section>
@@ -214,8 +264,17 @@ const StyledBox = styled(Box)`
   display: flex;
   flex-direction: column;
   text-transform: uppercase !important;
-  padding-top: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  max-height: 80%;
 `;
+const ResultContainer = styled(Box)`
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+`;
+
 const AnswerContainer = styled(Box)`
   background: transparent !important;
   background-color: rgba(0, 0, 0, 0.4) !important;
@@ -236,4 +295,16 @@ const QuizButton = styled(Button)`
   background-color: ${({ $active }) =>
     $active ? "#fbcea0 !important" : "transparent"};
   color: ${({ $active }) => ($active ? "black !important" : "#fbcea0")};
+`;
+
+const StyledAccordion = styled(Accordion)`
+  background: transparent !important;
+  width: 100%;
+`;
+const StyledAccordionSummary = styled(AccordionSummary)`
+  background-color: rgba(0, 0, 0, 0.4) !important;
+`;
+
+const StyledAccordionDetails = styled(AccordionDetails)`
+  background-color: rgba(0, 0, 0, 0.4) !important;
 `;
