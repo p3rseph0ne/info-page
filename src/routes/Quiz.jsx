@@ -28,8 +28,8 @@ function Quiz() {
       question: "Which D&D edition rules does Baldur's Gate 3 adapt?",
       choices: [
         "Fourth Edition",
-        "BFifth Edition",
-        "Third Editio",
+        "Fifth Edition",
+        "Third Edition",
         "Pathfinder",
       ],
       correctAnswer: "Fifth Edition",
@@ -68,7 +68,7 @@ function Quiz() {
     },
     {
       question: "Who is the deity associated with Shadowheart, the cleric?",
-      choices: ["Sorcerer", "Paladin", "Monk", "Blood Hunter"],
+      choices: ["Lolth", "Shar", "Lathander", "Selune"],
       correctAnswer: "Shar",
     },
     {
@@ -79,14 +79,15 @@ function Quiz() {
         "A performance check",
         "A baked good, worth 1 Camp Supply",
       ],
-      correctAnswer:
-        "The result of a dice roll of a performance check of any kind",
+      correctAnswer: "A performance check",
     },
   ];
   const [activeQuestion, setActiveQuestion] = useState();
   const [activeChoices, setActiveChoices] = useState([]);
+  const [activeCorrectAnswer, setActiveCorrectAnswer] = useState();
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [activeButton, setActiveButton] = useState();
+  const [quizCompleted, setQuizCompleted] = useState(false);
   const [result, setResult] = useState({
     score: 0,
     correctAnswers: 0,
@@ -104,16 +105,28 @@ function Quiz() {
 
     const nextQuestion = Quizquestions[nextIndex].question;
     const nextChoices = Quizquestions[nextIndex].choices;
-    const CorrectAnswer = Quizquestions[nextIndex].correctAnswer;
+    const nextCorrectAnswer = Quizquestions[nextIndex].correctAnswer;
 
     console.log(nextQuestion);
     console.log(nextChoices);
+    console.log(nextCorrectAnswer);
     setActiveQuestion(nextQuestion);
     setActiveChoices(nextChoices);
+    setActiveCorrectAnswer(nextCorrectAnswer);
   };
   const onNextQuestion = () => {
-    /* check ob -1 ist */
-    /* check ob nächste Frage existiert*/
+    console.log("score nach vorheriger frage:" + result.score);
+    if (selectedAnswer === activeCorrectAnswer) {
+      setResult({
+        ...result,
+        score: result.score + 1,
+      });
+      console.log("richtig");
+      console.log("score: " + result.score);
+    } else {
+      console.log("falsch");
+      console.log("score: " + result.score);
+    }
 
     const nextIndex =
       Quizquestions.findIndex(
@@ -122,25 +135,18 @@ function Quiz() {
 
     const nextQuestion = Quizquestions[nextIndex].question;
     const nextChoices = Quizquestions[nextIndex].choices;
-    const CorrectAnswer = Quizquestions[nextIndex].correctAnswer;
+    const nextCorrectAnswer = Quizquestions[nextIndex].correctAnswer;
 
     console.log(nextQuestion);
     console.log(nextChoices);
-    setActiveQuestion(nextQuestion);
-    setActiveChoices(nextChoices);
+    console.log(nextCorrectAnswer);
 
-    /* das funktioniert noch nicht so richtig, evtl so lösen, dass antworten gespeichert werden und am ende berechnet damit wir anzeigen können was
-    ausgewählt wurde*/
-    if (selectedAnswer === CorrectAnswer) {
-      setResult(
-        result.score + 1,
-        result.correctAnswers + 1,
-        result.wrongAnswers
-      );
-      console.log("richtig");
+    if (nextIndex <= 9) {
+      setActiveQuestion(nextQuestion);
+      setActiveChoices(nextChoices);
+      setActiveCorrectAnswer(nextCorrectAnswer);
     } else {
-      setResult(result.score, result.correctAnswers, result.wrongAnswers + 1);
-      console.log("falsch");
+      setQuizCompleted = true;
     }
     setSelectedAnswer("");
   };
@@ -164,8 +170,9 @@ function Quiz() {
           {activeQuestion && <Box> {activeQuestion} </Box>}
           <AnswerContainer>
             {activeChoices &&
-              activeChoices.map((choice) => (
+              activeChoices.map((choice, index) => (
                 <QuizButton
+                  key={index}
                   $active={activeButton == choice}
                   variant="outlined"
                   onClick={() => onChoice(choice)}
@@ -174,9 +181,13 @@ function Quiz() {
                 </QuizButton>
               ))}
           </AnswerContainer>
-          {activeQuestion && (
-            <QuizButton variant="outlined" onClick={() => onNextQuestion()}>
-              NUR KLICKBAR WENN ETWAS AUSGEWÄHLT WURDE
+          {activeQuestion && !quizCompleted && (
+            <QuizButton
+              variant="outlined"
+              disabled={!selectedAnswer}
+              onClick={() => onNextQuestion()}
+            >
+              NEXT
             </QuizButton>
           )}
         </StyledBox>
@@ -210,6 +221,9 @@ const QuizButton = styled(Button)`
   margin-left: 1rem !important;
   margin-bottom: 2rem !important;
   border-color: #fbcea0 !important;
+  &:disabled {
+    opacity: 0.3;
+  }
   background-color: ${({ $active }) =>
     $active ? "#fbcea0 !important" : "transparent"};
   color: ${({ $active }) => ($active ? "black !important" : "#fbcea0")};
