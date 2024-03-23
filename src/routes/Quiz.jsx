@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import Grove from "../assets/grove.png";
 import Section from "../components/shared/Section";
@@ -10,6 +11,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Typography from "@mui/material/Typography";
 
 function Quiz() {
   const Quizquestions = [
@@ -97,6 +99,11 @@ function Quiz() {
     givenAnswers: [],
   });
   const [showResultButton, setShowResultButton] = useState(false);
+  const [expanded, setExpanded] = React.useState("panel1");
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
 
   const onStart = () => {
     /* check ob -1 ist */
@@ -230,20 +237,25 @@ function Quiz() {
                   value={result.score * 10}
                 />
                 <Headline>
-                  You got {result.score} out of {Quizquestions.length} correct.
+                  You got {result.score} out of {Quizquestions.length} correct!
                 </Headline>
               </Stack>
 
               {Quizquestions.map((question, index) => (
-                <StyledAccordion>
+                <StyledAccordion
+                  expanded={expanded === question.question}
+                  onChange={handleChange(question.question)}
+                >
                   <StyledAccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    {question.question}
+                    <Typography variant="body2">{question.question}</Typography>
                   </StyledAccordionSummary>
                   <StyledAccordionDetails>
-                    Correct Answer: {question.correctAnswer}
-                    <br />
-                    Your Answer:{" "}
-                    {result.givenAnswers[Quizquestions.indexOf(question)]}
+                    <Typography variant="body2">
+                      Correct Answer: {question.correctAnswer}
+                      <br />
+                      Your Answer:{" "}
+                      {result.givenAnswers[Quizquestions.indexOf(question)]}
+                    </Typography>
                   </StyledAccordionDetails>
                 </StyledAccordion>
               ))}
@@ -258,15 +270,12 @@ function Quiz() {
 export default Quiz;
 
 const StyledBox = styled(Box)`
-  background: transparent !important;
-  background-color: rgba(0, 0, 0, 0.4) !important;
   width: 80%;
   display: flex;
   flex-direction: column;
   text-transform: uppercase !important;
-  padding-top: 1rem;
+  padding-top: 2rem;
   padding-bottom: 1rem;
-  max-height: 80%;
 `;
 const ResultContainer = styled(Box)`
   width: 100%;
@@ -276,9 +285,7 @@ const ResultContainer = styled(Box)`
 `;
 
 const AnswerContainer = styled(Box)`
-  background: transparent !important;
-  background-color: rgba(0, 0, 0, 0.4) !important;
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: grid;
   align-items: center;
   grid-template-columns: repeat(2, 1fr);
