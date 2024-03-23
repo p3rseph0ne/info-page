@@ -129,15 +129,11 @@ function Quiz() {
         score: result.score + 1,
         givenAnswers: result.givenAnswers.concat([selectedAnswer]),
       });
-      console.log("richtig");
-      console.log("score: " + result.score);
     } else {
       setResult({
         ...result,
         givenAnswers: result.givenAnswers.concat([selectedAnswer]),
       });
-      console.log("falsch");
-      console.log("score: " + result.score);
     }
     setActiveQuestion();
     setActiveChoices();
@@ -152,15 +148,11 @@ function Quiz() {
         score: result.score + 1,
         givenAnswers: result.givenAnswers.concat([selectedAnswer]),
       });
-      console.log("richtig");
-      console.log("score: " + result.score);
     } else {
       setResult({
         ...result,
         givenAnswers: result.givenAnswers.concat([selectedAnswer]),
       });
-      console.log("falsch");
-      console.log("score: " + result.score);
     }
 
     const nextIndex =
@@ -194,8 +186,9 @@ function Quiz() {
   return (
     <div>
       <Section background={Grove}>
-        {!quizCompleted ||
-          (activeQuestion && <Headline>Are you ready for Faerun?</Headline>)}
+        {quizCompleted && !activeQuestion && (
+          <Headline>Are you ready for Faerun?</Headline>
+        )}
         <StyledBox>
           {!activeQuestion && !quizCompleted && (
             <QuizButton variant="outlined" onClick={() => onStart()}>
