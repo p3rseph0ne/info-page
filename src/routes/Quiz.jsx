@@ -194,7 +194,8 @@ function Quiz() {
   return (
     <div>
       <Section background={Grove}>
-        <Headline>Are you ready for Faerun?</Headline>
+        {!quizCompleted ||
+          (activeQuestion && <Headline>Are you ready for Faerun?</Headline>)}
         <StyledBox>
           {!activeQuestion && !quizCompleted && (
             <QuizButton variant="outlined" onClick={() => onStart()}>
