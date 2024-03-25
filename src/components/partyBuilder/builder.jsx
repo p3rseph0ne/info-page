@@ -8,7 +8,7 @@ import Astarion from "../../assets/characters/astarion.png";
 import Gale from "../../assets/characters/gale.png";
 import Laezel from "../../assets/characters/laezel.png";
 import Wyll from "../../assets/characters/wyll.png";
-import PartyMember from "./partyMember";
+import PartyMember from "./PartyMember";
 
 const originCharacterParties = [
   {

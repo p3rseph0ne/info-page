@@ -12,196 +12,82 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
+import Quizquestions from "../data/quiz";
+import MailModal from "../components/quiz/MailModal";
 
 function Quiz() {
-  const Quizquestions = [
-    {
-      question: "What city does the game prominently feature?",
-      choices: ["Waterdeep", "Baldur's Gate", "Neverwinter", "Luskane"],
-      correctAnswer: "Baldur's Gate",
-    },
-    {
-      question: "Who is Bhaal?",
-      choices: [
-        "The God of Murder",
-        "The God of Death",
-        "The Lord of Darkness",
-        "The Goddes of Darkness",
-      ],
-      correctAnswer: "The God of Murder",
-    },
-    {
-      question: "Which D&D edition rules does Baldur's Gate 3 adapt?",
-      choices: [
-        "Fourth Edition",
-        "Fifth Edition",
-        "Third Edition",
-        "Pathfinder",
-      ],
-      correctAnswer: "Fifth Edition",
-    },
-    {
-      question: "Which character is a vampire spawn?",
-      choices: ["Astarion", "Volo", "Raphael", "Luskane"],
-      correctAnswer: "Astarion",
-    },
-    {
-      question: "Which Githyanki warrior is a potential party member?",
-      choices: ["Vlaakith", "Kith'rak Voss", "Lae'zel", "Orpehus"],
-      correctAnswer: "Lae'zel",
-    },
-    {
-      question:
-        "What affliction do the main characters share at the beginning of the game?",
-      choices: [
-        "Lycanthropy",
-        "Mind Flayer tadpole",
-        "Vampirism",
-        "Curse of Strahd",
-      ],
-      correctAnswer: "Mind Flayer tadpole",
-    },
-    {
-      question: "Which race is not playable in Baldur's Gate 3?",
-      choices: ["Tiefling", "Half-Elf", "Gnome", "Drow"],
-      correctAnswer: "Gnome",
-    },
-
-    {
-      question: "Which class is not available in Baldur's Gate 3?",
-      choices: ["Sorcerer", "Paladin", "Monk", "Blood Hunter"],
-      correctAnswer: "Blood Hunter",
-    },
-    {
-      question: "Who is the deity associated with Shadowheart, the cleric?",
-      choices: ["Lolth", "Shar", "Lathander", "Selune"],
-      correctAnswer: "Shar",
-    },
-    {
-      question: "What is a roll?",
-      choices: [
-        "A script with relevant player information",
-        "A bonus action",
-        "A performance check",
-        "A baked good, worth 1 Camp Supply",
-      ],
-      correctAnswer: "A performance check",
-    },
-  ];
-  const [activeQuestion, setActiveQuestion] = useState();
-  const [activeChoices, setActiveChoices] = useState([]);
-  const [activeCorrectAnswer, setActiveCorrectAnswer] = useState();
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [activeButton, setActiveButton] = useState();
-  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [result, setResult] = useState({
     score: 0,
     givenAnswers: [],
   });
-  const [showResultButton, setShowResultButton] = useState(false);
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = useState("");
+  const [open, setOpen] = React.useState(false);
+  const { question, choices, correctAnswer } = Quizquestions[activeIndex] ?? {};
+  const quizCompleted = activeIndex === Quizquestions.length;
 
-  const handleChange = (panel) => (event, newExpanded) => {
+  const handleChange = (panel) => (_, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
-  const onStart = () => {
-    /* check ob -1 ist */
-    /* check ob nächste Frage existiert*/
-    const nextIndex =
-      Quizquestions.findIndex(
-        (question) => question.question === activeQuestion
-      ) + 1;
-
-    const nextQuestion = Quizquestions[nextIndex].question;
-    const nextChoices = Quizquestions[nextIndex].choices;
-    const nextCorrectAnswer = Quizquestions[nextIndex].correctAnswer;
-
-    setActiveQuestion(nextQuestion);
-    setActiveChoices(nextChoices);
-    setActiveCorrectAnswer(nextCorrectAnswer);
-  };
-
-  const onResults = () => {
-    if (selectedAnswer === activeCorrectAnswer) {
-      setResult({
-        ...result,
-        score: result.score + 1,
-        givenAnswers: result.givenAnswers.concat([selectedAnswer]),
-      });
-    } else {
-      setResult({
-        ...result,
-        givenAnswers: result.givenAnswers.concat([selectedAnswer]),
-      });
-    }
-    setActiveQuestion();
-    setActiveChoices();
-    setSelectedAnswer();
-    setShowResultButton(false);
-  };
-
   const onNextQuestion = () => {
-    if (selectedAnswer === activeCorrectAnswer) {
-      setResult({
-        ...result,
-        score: result.score + 1,
-        givenAnswers: result.givenAnswers.concat([selectedAnswer]),
-      });
-    } else {
-      setResult({
-        ...result,
-        givenAnswers: result.givenAnswers.concat([selectedAnswer]),
-      });
-    }
+    setResult({
+      ...result,
+      score: selectedAnswer === correctAnswer ? result.score + 1 : result.score,
+      givenAnswers: result.givenAnswers.concat([selectedAnswer]),
+    });
 
-    const nextIndex =
-      Quizquestions.findIndex(
-        (question) => question.question === activeQuestion
-      ) + 1;
-    console.log("next index " + nextIndex);
-
-    const nextQuestion = Quizquestions[nextIndex].question;
-    const nextChoices = Quizquestions[nextIndex].choices;
-    const nextCorrectAnswer = Quizquestions[nextIndex].correctAnswer;
-
-    if (nextIndex == Quizquestions.length - 1) {
-      setQuizCompleted(true);
-      setShowResultButton(true);
-    }
-    if (nextIndex < Quizquestions.length) {
-      console.log("next index < quizquestions.length" + nextIndex);
-      setActiveQuestion(nextQuestion);
-      setActiveChoices(nextChoices);
-      setActiveCorrectAnswer(nextCorrectAnswer);
-    }
+    const nextIndex = activeIndex + 1;
+    setActiveIndex(nextIndex);
     setSelectedAnswer("");
   };
 
   const onChoice = (choice) => {
-    setActiveButton(choice);
     setSelectedAnswer(choice);
+  };
+
+  const onButtonClick = () => {
+    if (activeIndex === -1) {
+      setActiveIndex(0);
+      return;
+    }
+
+    onNextQuestion();
+  };
+
+  const getButtonLabel = () => {
+    if (quizCompleted) {
+      return "Result";
+    }
+
+    if (activeIndex === -1) {
+      return "Start";
+    }
+
+    return "Next";
+  };
+
+  const getButtonDisabled = () => {
+    if (activeIndex === -1 || selectedAnswer) {
+      return false;
+    }
+
+    return true;
   };
 
   return (
     <div>
       <Section background={Grove}>
-        {quizCompleted && !activeQuestion && (
-          <Headline>Are you ready for Faerun?</Headline>
-        )}
+        {activeIndex === -1 && <Headline>Are you ready for Faerun?</Headline>}
         <StyledBox>
-          {!activeQuestion && !quizCompleted && (
-            <QuizButton variant="outlined" onClick={() => onStart()}>
-              START
-            </QuizButton>
-          )}
-          {activeChoices && <Box> {activeQuestion} </Box>}
+          {choices && <Box> {question} </Box>}
           <AnswerContainer>
-            {activeChoices &&
-              activeChoices.map((choice, index) => (
+            {choices &&
+              choices.map((choice, index) => (
                 <QuizButton
                   key={index}
-                  $active={activeButton == choice}
+                  $active={selectedAnswer == choice}
                   variant="outlined"
                   onClick={() => onChoice(choice)}
                 >
@@ -209,21 +95,14 @@ function Quiz() {
                 </QuizButton>
               ))}
           </AnswerContainer>
-          {activeQuestion && !quizCompleted && (
-            <QuizButton
-              variant="outlined"
-              disabled={!selectedAnswer}
-              onClick={() => onNextQuestion()}
-            >
-              NEXT
-            </QuizButton>
-          )}
-          {showResultButton && (
-            <QuizButton variant="outlined" onClick={() => onResults()}>
-              RESULTS
-            </QuizButton>
-          )}
-          {quizCompleted && !activeQuestion && (
+          <QuizButton
+            variant="outlined"
+            disabled={getButtonDisabled()}
+            onClick={onButtonClick}
+          >
+            {getButtonLabel()}
+          </QuizButton>
+          {quizCompleted && (
             <ResultContainer>
               <Stack spacing={2} direction="row">
                 <CircularProgress
@@ -235,8 +114,9 @@ function Quiz() {
                 </Headline>
               </Stack>
 
-              {Quizquestions.map((question, index) => (
+              {Quizquestions.map((question) => (
                 <StyledAccordion
+                  key={question.question}
                   expanded={expanded === question.question}
                   onChange={handleChange(question.question)}
                 >
@@ -253,6 +133,15 @@ function Quiz() {
                   </StyledAccordionDetails>
                 </StyledAccordion>
               ))}
+
+              <QuizButton variant="outlined" onClick={() => setOpen(true)}>
+                Send my results per Mail
+              </QuizButton>
+              <MailModal
+                open={open}
+                handleClose={() => setOpen(false)}
+                result={result}
+              />
             </ResultContainer>
           )}
         </StyledBox>

@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import Stage from "../components/shared/Stage";
 import Hell from "../assets/hell.png";
 import Section from "../components/shared/Section";
-import Builder from "../components/partyBuilder/builder";
+import Builder from "../components/partyBuilder/Builder";
 
 const text = `
 In the richly detailed world of Baldur's Gate 3 (BG3), assembling a balanced party is crucial for navigating the myriad challenges and complex narratives that define the game. A balanced party ensures that players can effectively confront a wide range of scenarios, from intricate puzzles and environmental obstacles to diverse combat situations, each demanding a different approach and skill set.
