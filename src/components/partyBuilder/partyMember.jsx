@@ -5,7 +5,7 @@ import Astarion from "../../assets/characters/astarion.png";
 import Gale from "../../assets/characters/gale.png";
 import Laezel from "../../assets/characters/laezel.png";
 import Wyll from "../../assets/characters/wyll.png";
-import { Box, Tooltip, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
 
 function PartyMember({ name, description }) {

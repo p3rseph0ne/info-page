@@ -25,6 +25,10 @@ const pages = [
         path: "/#origin",
       },
       {
+        label: "Compare",
+        path: "/#compare",
+      },
+      {
         label: "FAQ",
         path: "/#faq",
       },

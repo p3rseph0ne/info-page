@@ -2,7 +2,10 @@
   "extends": ["airbnb", "airbnb/hooks", "react-hooks", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-        "linebreak-style": ["error", "windows"],
-        "react-hooks/exhaustive-deps": "warn"
- }
+    "linebreak-style": ["error", "windows"],
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "no-undef": "error"
+  }
 }

@@ -8,7 +8,9 @@ import { Typography } from "@mui/material";
 import Section from "../components/shared/Section";
 import Hell from "../assets/hell.png";
 import Grove from "../assets/grove.png";
+import Ruins from "../assets/ruins.png";
 import Stage from "../components/shared/Stage";
+import CompanionCompare from "../components/landingPage/compare/CompanionCompare";
 
 const text = `
 As you step through the gates of our digital realm, you find yourself at the threshold of a world brimming with enchantment, peril, and the promise of untold stories. This is where heroes are forged in the crucible of conflict, where alliances are formed in the shadows of ancient ruins, and where every choice can tip the scales of fate.
@@ -23,6 +25,9 @@ function Landingpage() {
       <Stage headline={"Welcome to Faerun and all its magic"} text={text} />
       <Section id="origin" background={Characters}>
         <OriginCharacters />
+      </Section>
+      <Section id="compare" background={Ruins}>
+        <CompanionCompare />
       </Section>
       <Section id="faq" background={Grove} height="50vh">
         <FAQAccordion />

@@ -23,7 +23,7 @@ function OriginCharacter({
         onMouseEnter={() => setDisplayBackside(true)}
         onMouseLeave={() => setDisplayBackside(false)}
       >
-        <StyledCardContent $transparentBackground={transparentBackground}>
+        <StyledCardContent>
           {!displayBackside ? (
             <CardMedia
               component="img"
