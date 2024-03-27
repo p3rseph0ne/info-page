@@ -3,6 +3,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import OriginCharacter from "../originCharacters/OriginCharacter";
 
+/**
+ * Renders OriginCharactercards with the props provided and handles the flipping of the cards on mouseenter and mouseleave so that the image and description change
+ * correctly
+ * @param {*} param0
+ * @returns
+ */
 function ChosenOne({ image, god, godDescription, description }) {
   const [showGodDescription, setShowGodDescription] = useState(false);
   return (
@@ -15,6 +21,8 @@ function ChosenOne({ image, god, godDescription, description }) {
         backsideImage={god}
         transparentBackground
       />
+      {/* if the state showGodDescription is set to true by onMouseEnter(), godDescription is shown. 
+      Otherwiese ( : -> else) description is shown*/}
       {showGodDescription ? (
         <Description>{godDescription}</Description>
       ) : (
@@ -23,6 +31,10 @@ function ChosenOne({ image, god, godDescription, description }) {
     </Container>
   );
 }
+
+/**
+ * Styled Components :)
+ */
 
 const Container = styled(Box)`
   min-width: 350px;

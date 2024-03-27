@@ -7,6 +7,16 @@ import { Box, CardActionArea } from "@mui/material";
 import styled from "styled-components";
 import SmokeBG from "../../../assets/smoke-bg.webp";
 
+/**
+ * Renders Character Card for a given Character Input
+ * @param {String} description - Character description that will be shown on the backside
+ * @param {String} backsideImage - path to the Image for the backside
+ * @param {image} image - path to the image for the front
+ * @param {String} alt - alttext to improve inclusivity for the component
+ * @param {*} transparanteBackground - value to decide whether or not the image and test will have a background image or be transparent
+ * @param {int} height - height value for the image in px, standard value being 500
+ * @returns
+ */
 function OriginCharacter({
   description,
   backsideImage,
@@ -19,11 +29,15 @@ function OriginCharacter({
 
   return (
     <StyledCard $transparentBackground={transparentBackground}>
+      {/* ActionAre is relevant to know in which are the state of displayBackside should be set */}
       <CardActionArea
         onMouseEnter={() => setDisplayBackside(true)}
         onMouseLeave={() => setDisplayBackside(false)}
       >
         <StyledCardContent>
+          {/* Check whether or not displaybackside is supposed to be shown rn, if not, show card media with front content
+          else if description is given, show description
+          else if backsideImage is given, show backsideImage */}
           {!displayBackside ? (
             <CardMedia
               component="img"
@@ -57,8 +71,13 @@ function OriginCharacter({
 }
 export default OriginCharacter;
 
+/**
+ * Styled Components :)
+ */
+
 const StyledCardContent = styled(CardContent)`
   height: 500px;
+  //depending on the prop input the background will be set to either transparent or a smoke image
   ${({ $transparentBackground }) =>
     $transparentBackground
       ? `background-color: transparent;`

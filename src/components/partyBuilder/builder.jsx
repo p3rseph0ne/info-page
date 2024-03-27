@@ -2,24 +2,39 @@ import { Box, Button, Tooltip, Typography } from "@mui/material";
 import { Headline } from "../shared/styled-components.sc";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-
 import PartyMember from "./PartyMember";
 import { originCharacterParties, tavParties } from "../../data/partyBuilder";
-
+/**
+ * Renders all of the Choice-Buttons as well as the dynamic partycontainer which displays the best picks for party companions based on the choice for the player character
+ * @returns
+ */
 function Builder() {
+  /* which Origin character is picked currently */
   const [currentPicksOrigin, setCurrentPicksOrigin] = useState([]);
+  /* Which player class is picked currently */
   const [currentPicksTav, setCurrentPicksTav] = useState([]);
+  /* Which party picks are dispalyed currently */
   const [currentParty, setCurrentParty] = useState([]);
+  /* Tracks which character button is currently selected to apply styling to that button */
   const [currentSelected, setCurrentSelected] = useState();
+  /* Tracks whether the user klicked on TAV or ORIGIN to render the correct set of option buttons in the pickcontainer  */
   const [activeButton, setActiveButton] = useState();
+  /* Tracks which class button is currently selected to apply styling to that button */
   const [activeClassButton, setActiveClassButton] = useState();
 
+  /* useEffect hook -> Sets currentparty, CurrentSelected and ActiveClassButton to undefined every time the user switches between the two to ensure that no class or
+  character is pre-selected when switching between tav and origin und there's also no "old" party recommendation displayed
+  for further information check out: https://react.dev/reference/react/useEffect */
   useEffect(() => {
     setCurrentParty([]);
     setCurrentSelected(undefined);
     setActiveClassButton(undefined);
   }, [activeButton]);
 
+  /**
+   * After the Origin button is clicked, the activebutton is set to origin and currentpicks is set to empty
+   * The function iterates over the provided list of possible characters to chose from and sets them in currentPicksOrigin to be displayed in the Pickcontainer
+   */
   const onOriginButtonClick = () => {
     setActiveButton("origin");
     setCurrentPicksTav([]);
@@ -34,6 +49,10 @@ function Builder() {
     setCurrentPicksOrigin(characterList);
   };
 
+  /**
+   * After the Tav button is clicked, the activebutton is set to tav and currentpicks is set to empty
+   * The function iterates over the provided list of possible classes to chose from and sets them in currentPicksTav to be displayed in the Pickcontainer
+   */
   const onTavButtonClick = () => {
     setActiveButton("tav");
     setCurrentPicksOrigin([]);
@@ -45,6 +64,12 @@ function Builder() {
     setCurrentPicksTav(characterList);
   };
 
+  /**
+   * sets currentselected to apply proper styling
+   * filters the list with all origin party combinations for the selected character and sets currentparty to the corresponding party for the picked character
+   * @param {String} name - nome of the origincharacter picked
+   * @param {int} index
+   */
   const onCharacterButtonClick = (name, index) => {
     setCurrentSelected(index);
     const party = originCharacterParties
@@ -53,6 +78,12 @@ function Builder() {
     setCurrentParty(party[0]);
   };
 
+  /**
+   * sets currentselected and activeclassbutton to apply proper styling
+   * filters the list with all class party combinations for the selected class and sets currentparty to the corresponding party for the picked class
+   * @param {String} classname - name of the class picked
+   * @param {int} index
+   */
   const onClassButtonClick = (classname, index) => {
     setActiveClassButton(classname);
     setCurrentSelected(index);
@@ -63,7 +94,7 @@ function Builder() {
   };
 
   return (
-    <Box>
+    <>
       <Headline>Build your party</Headline>
       <Container>
         <BuildArea>
@@ -84,6 +115,7 @@ function Builder() {
             </BuilderButton>
           </ButtonContainer>
           <PickContainer>
+            {/*Iterate over origin characters and display them */}
             {currentPicksOrigin.map((pick, index) => (
               <Tooltip key={pick.name} title={`${pick.name} (${pick.class})`}>
                 <CharacterButton
@@ -97,6 +129,7 @@ function Builder() {
           </PickContainer>
 
           <PickContainer>
+            {/*Iterate over class options and display them */}
             {currentPicksTav.map((pick, index) => (
               <BuilderButton
                 key={pick.class}
@@ -111,6 +144,7 @@ function Builder() {
         </BuildArea>
         <BuildArea>
           <PartyContainer>
+            {/*Iterate over currentparty and display every character in that party with an image and a description why theyd fit the party well */}
             {currentParty.map((member) => (
               <PartyMember
                 key={`member_${member.name}`}
@@ -121,11 +155,15 @@ function Builder() {
           </PartyContainer>
         </BuildArea>
       </Container>
-    </Box>
+    </>
   );
 }
 
 export default Builder;
+
+/**
+ * Styled Components :)
+ */
 
 const Container = styled(Box)`
   display: grid;

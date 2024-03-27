@@ -4,11 +4,17 @@ import { Headline } from "../../shared/styled-components.sc";
 import ChosenOne from "./ChosenOne";
 import deadThree from "../../../data/deadThree";
 
+/**
+ * Renders The Headline for the deadthree section. Also Provides the Container in which the deadThree ChosenOne Cards will be rendered and iterates over the
+ * list with the content for said ChosenOne Cards to provide each card instance with the correct props
+ * @returns
+ */
 function DeadThree() {
   return (
     <StyledBox>
       <Headline>The Dead Three</Headline>
       <Container>
+        {/*Iterate over deadThree list*/}
         {deadThree.map(({ god, description, image, godDescription }) => (
           <ChosenOne
             key={description}
@@ -23,6 +29,10 @@ function DeadThree() {
   );
 }
 export default DeadThree;
+
+/**
+ * Styled Components :)
+ */
 
 const StyledBox = styled(Box)`
   margin: 2rem 0;

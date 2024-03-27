@@ -7,6 +7,7 @@ import { Headline } from "../../shared/styled-components.sc";
 import styled from "styled-components";
 import NPCs from "../../../data/components";
 
+/* Needed to make the Carousel responsive, for further information check out the docs for the carousel library: https://www.npmjs.com/package/react-multi-carousel  */
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -26,12 +27,18 @@ const responsive = {
   },
 };
 
+/**
+ * Renders the Headline for the origin character section. Also Iterates over the NPC list provided and creates an originCharacter Card each inside of a Carousel
+ * for further information regarding the Carousel check out the docs for the carousel library: https://www.npmjs.com/package/react-multi-carousel
+ * @returns
+ */
 function OriginCharacters() {
   return (
     <Container>
       <Headline>Get to know: Origin Characters</Headline>
       <CarouselContainer>
         <Carousel responsive={responsive} dragable={false}>
+          {/* Iterate over every NPC List entry and provides the information stored in the list to the OriginCharacter props */}
           {NPCs.map(({ name, image, description }) => (
             <OriginCharacter
               key={name}
@@ -47,6 +54,10 @@ function OriginCharacters() {
 }
 
 export default OriginCharacters;
+
+/**
+ * Styled components :)
+ */
 
 const Container = styled(Box)`
   width: 100%;

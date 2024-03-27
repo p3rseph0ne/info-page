@@ -4,6 +4,9 @@ import DividerLine from "../../assets/divider/divider-line.svg";
 import DividerLeft from "../../assets/divider/divider-left.svg";
 import DividerRight from "../../assets/divider/divider-right.svg";
 
+/**
+ * Creates a divider Image that can be used to visually divide Sections
+ */
 function Divider() {
   return <StyledBox component={"span"} />;
 }
@@ -20,16 +23,19 @@ const StyledBox = styled(Box)`
     background-size: 100% 100%;
   }
 
+  /*Before creates the left part of the divider*/
   &:before {
     right: 100%;
     background-image: url(${DividerLeft});
   }
 
+  /*After creates the right part of the divider*/
   &:after {
     left: 100%;
     background-image: url(${DividerRight});
   }
 
+  /* creates middlepart of the divider*/
   position: absolute;
   bottom: -3px;
   left: 30px;

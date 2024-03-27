@@ -7,6 +7,7 @@
   src: url("../fonts/abhaya-libre-v17-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+/*Set font and font-color for the whole website so we dont have to do that in every single styled component*/
 * {
   font-family: "Abhaya Libre" !important;
   color: #fbcea0 !important;
