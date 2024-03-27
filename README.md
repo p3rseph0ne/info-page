@@ -19,11 +19,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -57,31 +52,26 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Make sure node is installed:
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+`````node -v
+npm -v````
+to check for version, if it's not installed use check here for instructions on how to install it:
+https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm
+
 
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Make sure node is installed:
-   node -v
-   npm -v
-   to check for version, if it's not installed use check here for instructions on how to install it:
-   https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm
+1. Clone the repository
+2. Navigate to the project folder and use
+```npm install```
+to install all needed dependencies
 
-2. Clone the repository
-3. Navigate to the project folder and use
-   npm install
-   to install all needed dependencies
+3. ```npm start```
 
-4. npm start
-
-5. learn really cool things about BG3 :)
+4. learn really cool things about BG3 :)
 <!-- ACKNOWLEDGMENTS -->
 
 ## Acknowledgments
@@ -95,3 +85,4 @@ Use this space to list resources you find helpful and would like to give credit 
 - [My wonderful boyfriend for not throwing me out of the apartment when I was cussing at my screen]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+`````
