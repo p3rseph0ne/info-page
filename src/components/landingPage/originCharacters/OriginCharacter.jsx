@@ -28,13 +28,13 @@ function OriginCharacter({
   const [displayBackside, setDisplayBackside] = useState(false);
 
   return (
-    <StyledCard $transparentBackground={transparentBackground}>
-      {/* ActionAre is relevant to know in which are the state of displayBackside should be set */}
+    <StyledCard>
+      {/* ActionArea is relevant to know in which are the state of displayBackside should be set */}
       <CardActionArea
         onMouseEnter={() => setDisplayBackside(true)}
         onMouseLeave={() => setDisplayBackside(false)}
       >
-        <StyledCardContent>
+        <StyledCardContent $transparentBackground={transparentBackground}>
           {/* Check whether or not displaybackside is supposed to be shown rn, if not, show card media with front content
           else if description is given, show description
           else if backsideImage is given, show backsideImage */}
