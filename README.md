@@ -79,8 +79,6 @@ _Below is an example of how you can instruct your audience on installing and set
    npm start
    ```
 
-```
-
 4. learn really cool things about BG3 :)
 <!-- ACKNOWLEDGMENTS -->
 
@@ -95,4 +93,3 @@ Use this space to list resources you find helpful and would like to give credit 
 - [My wonderful boyfriend for not throwing me out of the apartment when I was cussing at my screen]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-```
