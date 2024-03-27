@@ -54,8 +54,8 @@ To get a local copy up and running follow these simple example steps.
 
 Make sure node is installed:
 
-`````node -v
-npm -v````
+```node -v
+npm -v```
 to check for version, if it's not installed use check here for instructions on how to install it:
 https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm
 
@@ -85,4 +85,4 @@ Use this space to list resources you find helpful and would like to give credit 
 - [My wonderful boyfriend for not throwing me out of the apartment when I was cussing at my screen]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-`````
+````
