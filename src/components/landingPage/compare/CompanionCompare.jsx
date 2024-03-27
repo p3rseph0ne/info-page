@@ -7,13 +7,27 @@ import { DraggableCharacter } from "./DraggableCharacter";
 import { DroppableBox } from "./DroppableBox";
 import { originCharacterParties } from "../../../data/partyBuilder";
 
+/**
+ * Renders
+ * for further information regarding the drag and drop library used see: https://dndkit.com/
+ * @returns
+ */
 function CompanionCompare() {
+  /* keeps track of the container Id*/
   const [parentLeft, setParentLeft] = useState(undefined);
+  /* keeps track of the container Id*/
   const [parentRight, setParentRight] = useState(undefined);
+  /* keeps track of the character in the left droppable */
   const [leftPick, setLeftPick] = useState(undefined);
+  /* keeps track of the character in the right droppable */
   const [rightPick, setRightPick] = useState(undefined);
+  /* list of characters that are available */
   const characterList = originCharacterParties;
 
+  /**
+   * When a Droppable is dropped in a draggable, the containerId is stored to set ParentLeft or ParentRight to keep track of which container already has a draggable
+   * SetLeftPick/SetRightPick state is updated with the value of the character from the characterlist at the current characterIndex that caused the event
+   */
   function handleDragEnd(event) {
     const containerId = event.over.id;
     const direction = containerId.replace("droppable", "");
@@ -32,6 +46,7 @@ function CompanionCompare() {
       <Headline>Compare companions starting Stats</Headline>
       <DndContext onDragEnd={(event) => handleDragEnd(event)}>
         <CompanionBox>
+          {/* iterate over the characterlist and create a draggablecharacter each */}
           {characterList.map((character, index) => {
             return (
               <DraggableCharacter
@@ -44,6 +59,8 @@ function CompanionCompare() {
         </CompanionBox>
         <TwoColumnContainer>
           <DroppableBox id="droppableLeft">
+            {/* show the characterImage of the dropped draggablecharacter in the left container IF parent left is set to a character value 
+            otherwise show "Drop here" text*/}
             {parentLeft === "droppableLeft" ? (
               <StatBox>
                 <CharacterImage src={leftPick.image} alt={leftPick.name} />
@@ -51,8 +68,10 @@ function CompanionCompare() {
             ) : (
               "Drop here"
             )}
+            {/* if there is a DraggableCharacter in the left AND right DroppableBox, display the stats of the character in the left box */}
             {leftPick && rightPick && (
               <Stats>
+                {/* iterate over the key values of the current left pick*/}
                 {Object.keys(leftPick.startingStats).map((key) => {
                   return (
                     <Typography key={`left${key}`}>
@@ -64,6 +83,8 @@ function CompanionCompare() {
             )}
           </DroppableBox>
           <DroppableBox id="droppableRight">
+            {/* show the characterImage of the dropped draggablecharacter in the right container IF parent left is set to a character value 
+            otherwise show "Drop here" text*/}
             {parentRight === "droppableRight" ? (
               <StatBox>
                 <CharacterImage src={rightPick.image} alt={rightPick.name} />
@@ -71,8 +92,10 @@ function CompanionCompare() {
             ) : (
               "Drop here"
             )}
+            {/* if there is a DraggableCharacter in the left AND right DroppableBox, display the stats of the character in the left box */}
             {leftPick && rightPick && (
               <Stats>
+                {/* iterate over the key values of the current left pick*/}
                 {Object.keys(rightPick.startingStats).map((key) => {
                   return (
                     <Typography key={`right_${key}`}>
@@ -90,6 +113,10 @@ function CompanionCompare() {
 }
 
 export default CompanionCompare;
+
+/**
+ * Styled components :)
+ */
 
 const StyledBox = styled(Box)`
   margin: 2rem 0;

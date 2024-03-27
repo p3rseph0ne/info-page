@@ -21,14 +21,26 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Checkbox from "@mui/material/Checkbox";
 import emailjs from "@emailjs/browser";
 
-// https://mailtrap.io/blog/validate-emails-in-react/
-
+/**
+ * Modal to render a Form that takes various user Inpute and then send the given results to that user per Mail
+ * for further information about the mailing check: https://www.emailjs.com/
+ * @param {boolean} open - whether or not the modal is supposed to be open
+ * @param {*} handleClose - setOpen(false)
+ * @param {int} result - result achieved by user taking the quiz
+ * @returns
+ */
 function MailModal({ open, handleClose, result }) {
   const form = useRef();
 
+  /**
+   * Function to be called on submit of the given form
+   * uses MailJS to send an E-Mail with the given parameters to the given MailAdress
+   * @param {*} e - Event
+   */
   const sendEmail = (e) => {
     e.preventDefault();
 
+    /* usually you'd put those values in a seperate file and exclude that from your git repo to ensure no one can steal your key but im lazy rn */
     emailjs
       .send(
         "service_zaz5u2f",
@@ -71,14 +83,10 @@ function MailModal({ open, handleClose, result }) {
               <MenuItem value={4}>I'd rather not say</MenuItem>
             </Select>
           </FormControl>
-          <TextField
-            id="standard-helperText"
-            defaultValue="Name"
-            variant="standard"
-          />
+          <TextField id="Name" defaultValue="Name" variant="standard" />
           <TextField
             type="email"
-            id="standard-helperText"
+            id="email"
             defaultValue="Mail"
             variant="standard"
           />
@@ -139,6 +147,10 @@ function MailModal({ open, handleClose, result }) {
 }
 
 export default MailModal;
+
+/**
+ * Styled components :)
+ */
 
 const StyledModal = styled(Modal)`
   display: flex;
