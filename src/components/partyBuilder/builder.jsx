@@ -144,7 +144,8 @@ function Builder() {
         </BuildArea>
         <BuildArea>
           <PartyContainer>
-            {/*Iterate over currentparty and display every character in that party with an image and a description why theyd fit the party well */}
+            {/*Iterate over currentparty and display every character in that party with an image and a description why theyd fit the party well
+            See PartyMember.jsx */}
             {currentParty.map((member) => (
               <PartyMember
                 key={`member_${member.name}`}

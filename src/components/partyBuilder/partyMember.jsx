@@ -8,7 +8,14 @@ import Wyll from "../../assets/characters/wyll.png";
 import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
 
+/**
+ * Renders the image of a given party image as well as the given description
+ * @param {String} name - name of the character
+ * @param {String} description - description of the character
+ * @returns
+ */
 function PartyMember({ name, description }) {
+  /* returns the path to the correct character image based on the given name*/
   const getImageByCharacterName = (name) => {
     switch (name) {
       case "Astarion":
@@ -40,6 +47,10 @@ function PartyMember({ name, description }) {
 }
 
 export default PartyMember;
+
+/**
+ * Styled components :)
+ */
 
 const Container = styled(Box)`
   margin: 1rem 2rem;
