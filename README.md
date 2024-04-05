@@ -25,9 +25,9 @@
 
 <!-- ABOUT THE AUTHOR -->
 
-## About The AUthor
+## About The Author, learnings and special features
 
-This phenomenal Project was written by me (Miriam) with the everloving help of Stackoverflow. <br\>
+This phenomenal Project was written by me (Miriam) with the everloving help of Stackoverflow.
 What new things did I learn while making this?
 
 - How to use styled components
