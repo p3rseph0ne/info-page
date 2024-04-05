@@ -25,7 +25,7 @@
 
 <!-- ABOUT THE AUTHOR -->
 
-## About The Project
+## About The AUthor
 
 This phenomenal Project was written by me (Miriam) with the everloving help of Stackoverflow. <br\>
 What new things did I learn while making this?
