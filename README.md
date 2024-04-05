@@ -23,6 +23,21 @@
   </ol>
 </details>
 
+<!-- ABOUT THE AUTHOR -->
+
+## About The Project
+
+This phenomenal Project was written by me (Miriam) with the everloving help of Stackoverflow. <br\>
+What new things did I learn while making this?
+
+- How to use styled components
+- How use the drag n drop kit
+- How to use the Accordion library
+- How to use States the way they're intended to (turns out, not EVERYTHING needs to be in a state)
+
+Theres many sites with info about BG3. What is so special about this? <br\>
+Well besides the fact that I made this with my own hands, sweat, tears and blood - it's also the only website I know of that provides you with a party member comparison and party recommendation based on your pick.
+
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
