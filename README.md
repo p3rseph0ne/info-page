@@ -19,7 +19,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#acknowledgments">Other Ressources</a></li>
+    <li><a href="#Other used Ressources you might wanna check out">Other Ressources</a></li>
   </ol>
 </details>
 
