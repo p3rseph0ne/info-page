@@ -12,15 +12,22 @@ import OriginCharacter from "../originCharacters/OriginCharacter";
 function ChosenOne({ image, god, godDescription, description }) {
   const [showGodDescription, setShowGodDescription] = useState(false);
   return (
-    <Container
-      onMouseEnter={() => setShowGodDescription(true)}
-      onMouseLeave={() => setShowGodDescription(false)}
-    >
-      <OriginCharacter
-        image={image}
-        backsideImage={god}
-        transparentBackground
-      />
+    <Container>
+      {/*
+      Wrap "OriginCharacter" in a Box, to attach MouseEnter and MouseLeave eventlisteners
+      To only switch to the "God" if the user hovers over the image and not over the text
+      */}
+      <Box
+        onMouseEnter={() => setShowGodDescription(true)}
+        onMouseLeave={() => setShowGodDescription(false)}
+      >
+        <OriginCharacter
+          image={image}
+          backsideImage={god}
+          transparentBackground
+        />
+      </Box>
+
       {/* if the state showGodDescription is set to true by onMouseEnter(), godDescription is shown. 
       Otherwiese ( : -> else) description is shown*/}
       {showGodDescription ? (

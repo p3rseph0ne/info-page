@@ -10,19 +10,28 @@ import NPCs from "../../../data/components";
 /* Needed to make the Carousel responsive, for further information check out the docs for the carousel library: https://www.npmjs.com/package/react-multi-carousel  */
 const responsive = {
   superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
+    // Consider anything above 'xl' as super large
+    breakpoint: { max: 4000, min: 1537 }, // Adjusting min to just above 'xl'
     items: 5,
   },
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    // Maps to 'xl' and upper 'lg'
+    breakpoint: { max: 1536, min: 1200 }, // Using 'lg' and 'xl' breakpoints
     items: 3,
   },
+  smallDesktop: {
+    // Maps to lower 'lg' and 'md'
+    breakpoint: { max: 1199, min: 900 }, // Adjusting to 'md' and 'lg'
+    items: 2, // Assuming you want 3 items for smaller desktops as well; adjust as needed
+  },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    // Maps to 'sm' and 'md'
+    breakpoint: { max: 899, min: 600 }, // Using 'sm' and 'md' breakpoints
+    items: 1.5,
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    // Maps to 'xs' and 'sm'
+    breakpoint: { max: 599, min: 0 }, // Using 'xs' and 'sm'
     items: 1,
   },
 };

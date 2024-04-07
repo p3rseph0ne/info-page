@@ -1,7 +1,7 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useRef } from "react";
 import Modal from "@mui/material/Modal";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   FormControl,
   FormLabel,
@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Select, { selectClasses } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Switch from "@mui/material/Switch";
 import Radio from "@mui/material/Radio";
@@ -31,6 +31,7 @@ import emailjs from "@emailjs/browser";
  */
 function MailModal({ open, handleClose, result }) {
   const form = useRef();
+  const [gender, setGender] = useState(1);
 
   /**
    * Function to be called on submit of the given form
@@ -64,6 +65,10 @@ function MailModal({ open, handleClose, result }) {
       );
   };
 
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  };
+
   return (
     <StyledModal
       open={open}
@@ -72,11 +77,25 @@ function MailModal({ open, handleClose, result }) {
       aria-describedby="modal-modal-description"
     >
       <ModalContentContainer>
-        <Typography variant="h5">Gladly! Please fill out the Form:</Typography>
+        <Typography variant="h5">Please fill out the Form:</Typography>
         <Form ref={form} onSubmit={sendEmail}>
           <FormControl fullWidth>
             <InputLabel id="Gender">Gender</InputLabel>
-            <Select labelId="Gender" id="Gender" label="Gender">
+            <Select
+              labelId="Gender"
+              id="Gender"
+              label="Gender"
+              value={gender}
+              onChange={handleGenderChange}
+              MenuProps={{
+                PaperProps: {
+                  style: {
+                    backgroundColor: "black",
+                    color: "white",
+                  },
+                },
+              }}
+            >
               <MenuItem value={1}>Male</MenuItem>
               <MenuItem value={2}>Female</MenuItem>
               <MenuItem value={3}>Non-Binary</MenuItem>
@@ -160,9 +179,18 @@ const StyledModal = styled(Modal)`
 `;
 
 const ModalContentContainer = styled(Box)`
-  min-width: 50vw;
-  background-color: #ffffff;
+  background-color: black;
   padding: 2rem;
+
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      width: 70vw !important;
+    }
+
+    ${theme.breakpoints.up("lg")} {
+      min-width: 50vw;
+    }
+  `}
 `;
 
 const ModalButton = styled(Button)`

@@ -4,8 +4,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
-import styled from "styled-components";
-import { Box } from "@mui/material";
+import styled, { css } from "styled-components";
+import { Box, useMediaQuery } from "@mui/material";
 import { Headline } from "../shared/styled-components.sc";
 import FAQ from "../../data/faq";
 
@@ -14,6 +14,7 @@ function FAQAccordion() {
   const half = Math.ceil(FAQ.length / 2);
   const firstColumnItems = FAQ.slice(0, half);
   const secondColumnItems = FAQ.slice(half);
+  const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
   /* Renders Accordions is its own const because we need to do it two times, once for the left and once for the right side so we can simply reuse the same code
   and dont have to have it twice in the return () */
@@ -41,8 +42,14 @@ function FAQAccordion() {
       <Headline>FAQ</Headline>
       <StyledBox>
         <Container>
-          <Column>{renderAccordions(firstColumnItems)}</Column>
-          <Column>{renderAccordions(secondColumnItems)}</Column>
+          {matches ? (
+            <>
+              <Column>{renderAccordions(firstColumnItems)}</Column>
+              <Column>{renderAccordions(secondColumnItems)}</Column>
+            </>
+          ) : (
+            <Column>{renderAccordions(FAQ)}</Column>
+          )}
         </Container>
       </StyledBox>
     </OuterContainer>
@@ -76,7 +83,6 @@ const Column = styled(Box)`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 50%;
 
   &:nth-child(odd) {
     margin-right: 5px;
@@ -85,6 +91,16 @@ const Column = styled(Box)`
   &:nth-child(even) {
     margin-left: 5px;
   }
+
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      width: 100%;
+    }
+
+    ${theme.breakpoints.up("lg")} {
+      width: 50%;
+    }
+  `}
 `;
 
 const StyledAccordion = styled(Accordion)`

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDroppable } from "@dnd-kit/core";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Box } from "@mui/material";
 
 /**
@@ -22,10 +22,21 @@ export function DroppableBox(props) {
  */
 const StyledBox = styled(Box)`
   border: 1px solid #fbcea0;
-  height: 200px;
-  width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  margin: 1rem;
+
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      min-height: 150px;
+      min-width: 150px;
+    }
+
+    ${theme.breakpoints.up("md")} {
+      min-height: 200px;
+      min-width: 200px;
+    }
+  `}
 `;

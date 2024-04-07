@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Headline } from "../../shared/styled-components.sc";
 import ChosenOne from "./ChosenOne";
 import deadThree from "../../../data/deadThree";
@@ -47,4 +47,15 @@ const Container = styled(Box)`
   flex-direction: row;
   justify-content: space-between;
   width: 90%;
+
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    ${theme.breakpoints.up("lg")} {
+      flex-direction: row;
+    }
+  `}
 `;

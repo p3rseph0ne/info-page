@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { CharacterImage, Headline } from "../../shared/styled-components.sc";
 import { DndContext } from "@dnd-kit/core";
 import { DraggableCharacter } from "./DraggableCharacter";
@@ -124,22 +124,59 @@ const StyledBox = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      margin-bottom: 15rem;
+    }
+
+    ${theme.breakpoints.up("md")} {
+      margin-bottom: 10rem;
+    }
+  `}
 `;
 
 const CompanionBox = styled(Box)`
   margin: 2rem 0;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
   align-items: center;
+
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    ${theme.breakpoints.up("md")} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    ${theme.breakpoints.up("lg")} {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  `}
 `;
 
 const TwoColumnContainer = styled(Box)`
   display: flex;
   flex-direction: row;
   margin-top: 2rem;
-  width: 50%;
+  width: 80%;
+
   justify-content: space-between;
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      width: 100%;
+    }
+
+    ${theme.breakpoints.up("sm")} {
+      width: 80%;
+    }
+
+    ${theme.breakpoints.up("md")} {
+      width: 50%;
+    }
+  `}
 `;
 
 const StatBox = styled(Box)`
@@ -148,5 +185,5 @@ const StatBox = styled(Box)`
 
 const Stats = styled(Box)`
   position: absolute;
-  top: 225px;
+  top: calc(225px + 1rem);
 `;

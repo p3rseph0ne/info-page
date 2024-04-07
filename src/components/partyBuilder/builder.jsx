@@ -1,6 +1,6 @@
 import { Box, Button, Tooltip, Typography } from "@mui/material";
 import { Headline } from "../shared/styled-components.sc";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useEffect, useState } from "react";
 import PartyMember from "./PartyMember";
 import { originCharacterParties, tavParties } from "../../data/partyBuilder";
@@ -168,19 +168,38 @@ export default Builder;
 
 const Container = styled(Box)`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    ${theme.breakpoints.up("lg")} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  `}
 `;
 
 const BuildArea = styled(Box)`
-  height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 49vw;
 
-  &:nth-child(odd) {
-    border-right: 1px solid #fbcea0;
-  }
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      &:nth-child(odd) {
+        border-bottom: 1px solid #fbcea0;
+      }
+      min-height: 50vw;
+    }
+    ${theme.breakpoints.up("lg")} {
+      &:nth-child(odd) {
+        border-right: 1px solid #fbcea0;
+      }
+      height: calc(100vh - 200px);
+    }
+  `}
 `;
 
 const ButtonContainer = styled(Box)``;
@@ -203,7 +222,15 @@ const BuilderButton = styled(Button)`
 `;
 
 const CharacterImage = styled.img`
-  width: 150px;
+  ${({ theme }) => css`
+    ${theme.breakpoints.up("xs")} {
+      width: 100px;
+    }
+
+    ${theme.breakpoints.up("lg")} {
+      width: 150px;
+    }
+  `}
 `;
 
 const PartyContainer = styled(Box)`

@@ -6,6 +6,9 @@ import LandingPage from "./routes/LandingPage";
 import Partybuilder from "./routes/PartyBuilderPage";
 import Quiz from "./routes/QuizPage";
 import Page from "./routes/Page";
+import { ThemeProvider } from "styled-components";
+import { ThemeProvider as MUIThemeProvider } from "@mui/material";
+import { theme } from "./styling/theme";
 
 /**
  * https://reactrouter.com/en/main
@@ -36,6 +39,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <MUIThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </MUIThemeProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
