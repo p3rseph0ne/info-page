@@ -19,7 +19,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#acknowledgments">Other Ressources</a></li>
   </ol>
 </details>
 
@@ -52,6 +52,8 @@ full of wonderful stories, characters and places, I couldn't think of a better t
 In this project you'll find an Intro to the game, an introduction to all of the relevant Origincharacters, a companion-compare section, a FAQ that (hopefully)
 answers all of your questions, the who-is-who of murderous-god-chosens as well as a partybuilder that can help you find and build a balanced party for your best
 playing experience and a Quiz to tell you how ready you are for your travels through Faerun.
+
+Special thanks to my wonderful boyfriend for not throwing me out of the apartment when I was cussing at my screen.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -101,12 +103,13 @@ _Below is an example of how you can instruct your audience on installing and set
 4. learn really cool things about BG3 :)
 <!-- ACKNOWLEDGMENTS -->
 
-## Acknowledgments
+## Other used Ressources you might wanna check out
 
 - [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel)
 - [Drag and Drop Kit](https://dndkit.com/)
 - [Material UI](https://mui.com/)
 - [React Icons](https://react-icons.github.io/react-icons/search)
-- [My wonderful boyfriend for not throwing me out of the apartment when I was cussing at my screen]
+- [Styled Components](https://styled-components.com/)
+- [React Router](https://reactrouter.com/en/main)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
