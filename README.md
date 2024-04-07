@@ -34,9 +34,12 @@ What new things did I learn while making this?
 - How use the drag n drop kit
 - How to use the Accordion library
 - How to use States the way they're intended to (turns out, not EVERYTHING needs to be in a state)
+- How to make a react project responsive using MUI themes
 
-Theres many sites with info about BG3. What is so special about this? <br\>
+Theres many sites with info about BG3. What is so special about this?
 Well besides the fact that I made this with my own hands, sweat, tears and blood - it's also the only website I know of that provides you with a party member comparison and party recommendation based on your pick.
+
+If you have any questions you can reach me via Mail: miriam.hauer.33@gmail.com
 
 <!-- ABOUT THE PROJECT -->
 
@@ -44,7 +47,8 @@ Well besides the fact that I made this with my own hands, sweat, tears and blood
 
 Idk about you but I'm an advant gamer, so when it comes to finding a socially well accepted topic to Infodump about I'll usually go for this one.
 Since the hype around Baldurs Gate 3 can't be denied and I, myself, am hip-deep into my fourth run trying to explore every pebble of Faerun and it's lively world
-full of wonderful stories, characters and places, I couldn't think of a better topic to practice my react skills on. <br/>
+full of wonderful stories, characters and places, I couldn't think of a better topic to practice my react skills on.
+
 In this project you'll find an Intro to the game, an introduction to all of the relevant Origincharacters, a companion-compare section, a FAQ that (hopefully)
 answers all of your questions, the who-is-who of murderous-god-chosens as well as a partybuilder that can help you find and build a balanced party for your best
 playing experience and a Quiz to tell you how ready you are for your travels through Faerun.
@@ -74,7 +78,7 @@ node -v
 npm -v
 ```
 
-to check for version, if it's not installed use check here for instructions on how to install it:
+if it's not installed check this out for instructions on how to install it:
 https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm
 
 ### Installation
@@ -98,8 +102,6 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- ACKNOWLEDGMENTS -->
 
 ## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
 - [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel)
 - [Drag and Drop Kit](https://dndkit.com/)
