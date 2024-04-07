@@ -101,6 +101,12 @@ function Quiz() {
       {/* ensure that the headline will only be shown until the quiz is started */}
       {activeIndex === -1 && <Headline>Are you ready for Faerun?</Headline>}
       <StyledBox>
+        {activeIndex >= 0 && (
+          <Box>
+            {activeIndex} / {Quizquestions.length}
+          </Box>
+        )}
+
         {/* ensure the the question is only shown once choices is not empty (== new question, choices and correct answer were set after the user pressed start) */}
         {choices && <Box> {question} </Box>}
         <AnswerContainer>
@@ -185,6 +191,7 @@ const StyledBox = styled(Box)`
   text-transform: uppercase !important;
   padding-top: 2rem;
   padding-bottom: 1rem;
+  background-color: rgba(0, 0, 0, 0.6) !important;
 `;
 const ResultContainer = styled(Box)`
   width: 100%;

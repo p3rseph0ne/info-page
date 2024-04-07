@@ -102,8 +102,14 @@ function MailModal({ open, handleClose, result }) {
               <MenuItem value={4}>I'd rather not say</MenuItem>
             </Select>
           </FormControl>
-          <TextField id="Name" defaultValue="Name" variant="standard" />
           <TextField
+            required
+            id="Name"
+            defaultValue="Name"
+            variant="standard"
+          />
+          <TextField
+            required
             type="email"
             id="email"
             defaultValue="Mail"
