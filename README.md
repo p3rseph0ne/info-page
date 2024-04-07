@@ -19,7 +19,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#Other used Ressources you might wanna check out">Other Ressources</a></li>
+    <li><a href="#Other-Ressources-I-used-that-you-might-wanna-check-out">Other Ressources</a></li>
   </ol>
 </details>
 
@@ -103,7 +103,7 @@ _Below is an example of how you can instruct your audience on installing and set
 4. learn really cool things about BG3 :)
 <!-- ACKNOWLEDGMENTS -->
 
-## Other used Ressources you might wanna check out
+## Other Ressources I used that you might wanna check out
 
 - [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel)
 - [Drag and Drop Kit](https://dndkit.com/)
